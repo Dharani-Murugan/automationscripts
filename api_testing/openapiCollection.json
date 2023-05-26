@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "ad03fbd8-1463-49f9-82fd-b16c4d000478",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27558076"
+	},
+	"item": [
+		{
+			"name": "https://api.publicapis.org/entries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"countValue\", jsonData.count);\r",
+							"pm.test(\"Printed count value in console\", function () {\r",
+							"console.log(\"Count value:\", pm.environment.get(\"countValue\"));\r",
+							"    });\r",
+							"pm.environment.unset(\"countValue\");\r",
+							"pm.test(\"Count text is present in response\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"});\r",
+							"\r",
+							"    pm.test(\"Count value is greater than 600\", function () {\r",
+							"        pm.expect(jsonData.count).to.be.greaterThan(600);\r",
+							"    });\r",
+							"    \r",
+							"    pm.test(\"First object API key value is equal to 'AdoptAPet'\", function () {\r",
+							"        pm.expect(jsonData.entries[0].API).to.equal(\"AdoptAPet\");\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"Printed description value in console\", function () {\r",
+							"        console.log(\"Description value:\", jsonData.entries[0].Description);\r",
+							"    });\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://api.publicapis.org/entries"
+			},
+			"response": []
+		}
+	]
+}
